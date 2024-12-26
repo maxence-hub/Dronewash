@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Le Monde du Vélo</title>
+    <style>
+        /* Style général du site */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(45deg, #009688, #004d00);
+            background-size: 400% 400%;
+            animation: gradientAnimation 10s ease infinite;
+            color: white;
+        }
+
+        /* Animation du fond */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* En-tête du site */
+        header {
+            text-align: center;
+            padding: 50px;
+            background-color: rgba(0, 77, 0, 0.7);
+            border-bottom: 2px solid #fff;
+            position: relative;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        header h1 {
+            font-size: 48px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        header p {
+            font-size: 18px;
+            font-weight: 300;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 2s ease-out;
+        }
+
+        nav a {
+            color: white;
+            padding: 15px 25px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #4CAF50;
+            color: black;
+        }
+
+        /* Conteneur principal */
+        .container {
+            width: 80%;
+            margin: 50px auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .section-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            width: 30%;
+            margin: 15px;
+            text-align: center;
+            padding: 20px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUpCard 1s forwards;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            font-size: 24px;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            animation: fadeIn 2s ease-out;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUpCard {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsivité */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+            }
+
+            .card {
+                width: 45%;
+            }
+
+            header h1 {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                width: 100%;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Le Monde du Vélo</h1>
+    <p>Bienvenue dans l'univers du vélo : conseils, équipements et passion !</p>
+</header>
+
+<nav>
+    <a href="#accueil">Accueil</a>
+    <a href="#conseils">Conseils</a>
+    <a href="#types">Types de vélos</a>
+	<a href="entrainement.html">Entraînements</a>
+	<a href="circuit.html">Circuit</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<div class="container" id="accueil">
+    <h2 class="section-title">Introduction au Vélo</h2>
+    <div class="section-content">
+        <div class="card">
+            <img src="https://www.francevelotourisme.com/sites/default/files/styles/ogimage/public/medias/images/scandibrique---oise---alexandre-leroy_53541932596_o.jpg?itok=XKFZa9Pl" alt="Vélo en plein air">
+            <h3>Le vélo : un moyen de transport écologique</h3>
+            <p>Le vélo est un moyen de transport pratique et respectueux de l'environnement. Il permet de réduire les émissions de CO2 tout en améliorant votre santé.</p>
+        </div>
+        <div class="card">
+            <img src="https://artivelo.fr/483-large_default/velo-urbain-ktm-kent-11-alfine-belt.jpg" alt="Vélo urbain">
+            <h3>Vélo urbain</h3>
+            <p>Les vélos urbains sont parfaits pour vos déplacements quotidiens en ville. Léger et pratique, il facilite vos trajets.</p>
+        </div>
+        <div class="card">
+            <img src="https://cdn.shoplightspeed.com/shops/624895/files/59281504/image.jpg" alt="Vélo de montagne">
+            <h3>Vélo de montagne</h3>
+            <p>Pour les passionnés de nature et d'aventure, le vélo de montagne est idéal. Il est conçu pour affronter les terrains les plus difficiles.</p>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="conseils">
+    <h2 class="section-title">Conseils pour débuter</h2>
+    <p>Avant de vous lancer dans le monde du vélo, voici quelques conseils utiles :</p>
+    <ul>
+        <li><strong>Choisir le bon vélo :</strong> Optez pour un vélo adapté à votre activité (urbain, montagne, route, etc.).</li>
+        <li><strong>Investir dans un bon équipement :</strong> Ne négligez pas le casque, les gants et des vêtements confortables.</li>
+        <li><strong>Commencer progressivement :</strong> Si vous êtes débutant, commencez par des trajets courts avant d'augmenter la distance.</li>
+    </ul>
+</div>
+
+<div class="container" id="types">
+    <h2 class="section-title">Les Différents Types de Vélos</h2>
+    <div class="section-content">
+        <div class="card">
+            <img src="https://www.ebike24.fr/blog/wp-content/uploads/2023/12/velo-de-route-a-assistance-electrique-e-edr-af-sram-apex-axs-930x620.jpg" alt="Vélo de course">
+            <h3>Vélo de course</h3>
+            <p>Conçu pour la vitesse et l'efficacité sur route, ce vélo est parfait pour les cyclistes de compétition ou les amateurs de longues distances.</p>
+        </div>
+        <div class="card">
+            <img src="https://im.qccdn.fr/node/guide-d-achat-velo-electrique-8147/thumbnail_1000x600px-142430.jpg" alt="Vélo électrique">
+            <h3>Vélo électrique</h3>
+            <p>Avec un moteur électrique, ce vélo vous aide à parcourir de longues distances sans effort supplémentaire, parfait pour les trajets en ville.</p>
+        </div>
+        <div class="card">
+            <img src="https://www.cyclable.com/47448-thickbox_default/velo-enfant-14-pouces-ridgeback-mx14.jpg" alt="Vélo pour enfant">
+            <h3>Vélo pour enfant</h3>
+            <p>Les vélos pour enfants sont conçus pour offrir sécurité et confort tout en apprenant à rouler.</p>
+        </div>
+    </div>
+</div>
+
+<footer id="contact">
+    <p>Contactez-nous : contact@lemondevélo.fr</p>
+    <p>&copy; 2024 Le Monde du Vélo</p>
+</footer>
+</body>
+</html>
+

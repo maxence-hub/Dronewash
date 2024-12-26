@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entraînement Vélo - Pro</title>
+    <style>
+        /* Styles globaux */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            background-size: 400% 400%;
+            animation: gradientBG 10s infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+            color: #ff6f61;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .filter-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-item label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .filter-item input,
+        .filter-item select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-btn {
+            text-align: center;
+        }
+
+        .filter-btn button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .filter-btn button:hover {
+            background-color: #e55d4e;
+            transform: scale(1.05);
+        }
+
+        .results {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border-radius: 10px;
+            width: 300px;
+            padding: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .result-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #ff6f61;
+        }
+
+        .result-card p {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            color: #fff;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Entraînement Vélo - Niveau Pro</h1>
+        <p>Créez votre entraînement personnalisé pour atteindre vos objectifs !</p>
+    </header>
+
+    <div class="container">
+        <div class="filters">
+            <div class="filter-item">
+                <label for="distance">Distance (km)</label>
+                <input type="number" id="distance" placeholder="Exemple : 50">
+            </div>
+            <div class="filter-item">
+                <label for="duration">Durée (minutes)</label>
+                <input type="number" id="duration" placeholder="Exemple : 120">
+            </div>
+            <div class="filter-item">
+                <label for="intensity">Intensité</label>
+                <select id="intensity">
+                    <option value="faible">Faible</option>
+                    <option value="modérée">Modérée</option>
+                    <option value="élevée">Élevée</option>
+                </select>
+            </div>
+            <div class="filter-btn">
+                <button onclick="generateResults()">Afficher les Entraînements</button>
+            </div>
+        </div>
+
+        <div class="results" id="results">
+            <!-- Résultats dynamiques -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Entraînement Vélo Pro - Tous droits réservés</p>
+    </footer>
+
+    <script>
+        function generateResults() {
+            const distance = document.getElementById('distance').value;
+            const duration = document.getElementById('duration').value;
+            const intensity = document.getElementById('intensity').value;
+            const results = document.getElementById('results');
+
+            if (!distance || !duration || !intensity) {
+                alert("Veuillez remplir tous les champs !");
+                return;
+            }
+
+            // Exemple de résultats dynamiques
+            const workouts = [
+                { title: "Entraînement Endurance", desc: "Parfait pour construire une base solide.", distance: distance, duration: duration, intensity: "Modérée" },
+                { title: "Entraînement HIIT", desc: "Des efforts intenses et des récupérations courtes.", distance: distance / 2, duration: duration / 2, intensity: "Élevée" },
+                { title: "Balade Récupérative", desc: "Idéal pour récupérer après une grosse session.", distance: distance / 3, duration: duration, intensity: "Faible" },
+            ];
+
+            // Génération du contenu HTML
+            results.innerHTML = workouts.map(workout => `
+                <div class="result-card">
+                    <h3>${workout.title}</h3>
+                    <p>${workout.desc}</p>
+                    <p><strong>Distance :</strong> ${workout.distance} km</p>
+                    <p><strong>Durée :</strong> ${workout.duration} min</p>
+                    <p><strong>Intensité :</strong> ${workout.intensity}</p>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>

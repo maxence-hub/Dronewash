@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entraînements Vélo Personnalisés</title>
+    <style>
+        /* Styles globaux */
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            background: linear-gradient(135deg, #1d2671, #c33764);
+            background-size: 400% 400%;
+            animation: gradientBG 10s infinite;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+            color: #ff6f61;
+            text-transform: uppercase;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .filter-item {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .filter-item label {
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .filter-item select, .filter-item input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-btn {
+            text-align: center;
+            flex-basis: 100%;
+        }
+
+        .filter-btn button {
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .filter-btn button:hover {
+            background-color: #e55d4e;
+            transform: scale(1.05);
+        }
+
+        .results {
+            margin-top: 30px;
+        }
+
+        .results .section-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #ff6f61;
+            text-transform: uppercase;
+        }
+
+        .result-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .result-card {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border-radius: 10px;
+            width: 300px;
+            padding: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .result-card img {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .result-card h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #ff6f61;
+        }
+
+        .result-card p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .result-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #111;
+            color: #fff;
+            margin-top: 50px;
+            font-size: 14px;
+        }
+
+        /* Conseils d'entraînement */
+        .training-tips {
+            margin-top: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .training-tips h4 {
+            color: #ff6f61;
+            margin-bottom: 15px;
+        }
+
+        .training-tips ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .training-tips li {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Entraînements Vélo Personnalisés</h1>
+        <p>Choisissez vos parcours selon les saisons et les distances.</p>
+    </header>
+
+    <div class="container">
+        <div class="filters">
+            <div class="filter-item">
+                <label for="season">Saison</label>
+                <select id="season">
+                    <option value="">Choisir une saison</option>
+                    <option value="Printemps">Printemps</option>
+                    <option value="Été">Été</option>
+                    <option value="Automne">Automne</option>
+                    <option value="Hiver">Hiver</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label for="distance">Distance (km)</label>
+                <input type="number" id="distance" placeholder="Exemple : 30">
+            </div>
+            <div class="filter-btn">
+                <button onclick="generateResults()">Afficher les Parcours</button>
+            </div>
+        </div>
+
+        <div class="results" id="results">
+            <!-- Résultats dynamiques -->
+        </div>
+
+        <div class="training-tips" id="training-tips">
+            <!-- Conseils d'entraînement dynamiques -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Entraînements Vélo Pro - Tous droits réservés</p>
+    </footer>
+
+    <script>
+        const parcoursParSaison = {
+            Printemps: [
+                { title: "Parc des Buttes-Chaumont", img: "https://cdn.sortiraparis.com/images/80/98059/749179-photos-le-parc-des-buttes-chaumont.jpg", distance: 10 },
+                { title: "Lac d'Enghien", img: "https://enghienlesbains-tourisme.fr/sites/ot-enghienlesbains/files/image/article/_nl16158.jpg", distance: 20 },
+                { title: "Canal Saint-Martin", img: "https://www.agencedesenfantsrouges.com/wp-content/themes/yootheme/cache/le-canal-saint-martin-paris-vince-duque-unsplash-7d62ecf5.jpeg", distance: 30 },
+                { title: "Jardin des Plantes", img: "https://media.timeout.com/images/105489382/image.jpg", distance: 40 },
+                { title: "Bois de Vincennes", img: "https://static.actu.fr/uploads/2022/03/adobestock-124809883.jpeg", distance: 50 },
+                { title: "Parc de la Villette", img: "https://media.istockphoto.com/id/628193926/fr/photo/la-g%C3%A9ode-dans-le-parc-de-la-villette-%C3%A0-paris.jpg?s=612x612&w=0&k=20&c=0QbT6wryZdJ2sD9o79B8SgleHgC9sqE8Tg6P4p7rJsI=", distance: 60 },
+                { title: "Forêt de Fontainebleau", img: "https://www.fontainebleau.fr/fileadmin/_processed_/6/a/csm_Chateau_vue_du_ciel_2_Fontainebleau_TechniFlight_49993ed88c.jpg", distance: 70 },
+                { title: "Parc de Sceaux", img: "https://cdn.sortiraparis.com/images/80/102463/905190-le-gue-l-installation-ephemere-du-domaine-de-sceaux-qui-fait-marcher-sur-l-eau-a7c4844.jpg", distance: 80 },
+                { title: "Montmartre", img: "https://parisjetaime.com/data/layout_image/18683_La-Villa-Leandre-matin--630x405--%C2%A9-Mary-Quincy.jpg", distance: 90 },
+                { title: "Versailles", img: "https://i4.ytimg.com/vi/wi3NlaiwjP4/maxresdefault.jpg", distance: 100 },
+            ],
+            Été: [
+                { title: "Lac d'Annecy", img: "https://www.thonescoeurdesvallees.com/wp-content/uploads/2020/09/La_ville_et_le_lac_d_Annecy-Lac_Annecy_Tourisme-907-1200x794.jpg", distance: 10 },
+                { title: "Calanques de Marseille", img: "https://i-de.unimedias.fr/2023/12/07/def-189-calanques-cmoirenc117610-6571e657e00ed.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=max&w=1050", distance: 20 },
+                { title: "Bordeaux", img: "https://images.ladepeche.fr/api/v1/images/view/6611133ecfd07d1f682952ca/large/image.jpg?v=1", distance: 30 },
+                { title: "Dune du Pilat", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPcG9MKp4Uh9exv0p9HE0V8tQ5iQ6yEsCBiQ&s", distance: 40 },
+                { title: "Puy du Fou", img: "https://www.augoutdemma.be/wp-content/uploads/2022/05/puy-du-fou-2022-76.jpg", distance: 50 },
+                { title: "Lyon", img: "https://a2f6z9k6.rocketcdn.me/wp-content/uploads/2019/11/ville_lyon-scaled.jpg", distance: 60 },
+                { title: "Mont Saint-Michel", img: "https://www.angemichel.com/voy_content/uploads/2024/03/mont-saint-michel.png", distance: 70 },
+                { title: "Lille", img: "https://pvtistes.net/wp-content/uploads/2023/11/shutterstock_115970323-1900x800.jpg", distance: 80 },
+                { title: "Normandie", img: "https://www.okvoyage.com/wp-content/uploads/2023/11/les-belles-villes-de-normandie.jpg", distance: 90 },
+                { title: "Mont Ventoux", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcDVNK5_Z7_So2Ayp78Zjjbaml8JYVCpegjQ&s", distance: 100 },
+            ],
+		    Automne: [
+                { title: "Parc des Buttes-Chaumont", img: "https://cdn.sortiraparis.com/images/80/98059/749179-photos-le-parc-des-buttes-chaumont.jpg", distance: 10 },
+                { title: "Lac d'Enghien", img: "https://enghienlesbains-tourisme.fr/sites/ot-enghienlesbains/files/image/article/_nl16158.jpg", distance: 20 },
+                { title: "Canal Saint-Martin", img: "https://www.agencedesenfantsrouges.com/wp-content/themes/yootheme/cache/le-canal-saint-martin-paris-vince-duque-unsplash-7d62ecf5.jpeg", distance: 30 },
+                { title: "Jardin des Plantes", img: "https://media.timeout.com/images/105489382/image.jpg", distance: 40 },
+                { title: "Bois de Vincennes", img: "https://static.actu.fr/uploads/2022/03/adobestock-124809883.jpeg", distance: 50 },
+                { title: "Parc de la Villette", img: "https://media.istockphoto.com/id/628193926/fr/photo/la-g%C3%A9ode-dans-le-parc-de-la-villette-%C3%A0-paris.jpg?s=612x612&w=0&k=20&c=0QbT6wryZdJ2sD9o79B8SgleHgC9sqE8Tg6P4p7rJsI=", distance: 60 },
+                { title: "Forêt de Fontainebleau", img: "https://www.fontainebleau.fr/fileadmin/_processed_/6/a/csm_Chateau_vue_du_ciel_2_Fontainebleau_TechniFlight_49993ed88c.jpg", distance: 70 },
+                { title: "Parc de Sceaux", img: "https://cdn.sortiraparis.com/images/80/102463/905190-le-gue-l-installation-ephemere-du-domaine-de-sceaux-qui-fait-marcher-sur-l-eau-a7c4844.jpg", distance: 80 },
+                { title: "Montmartre", img: "https://parisjetaime.com/data/layout_image/18683_La-Villa-Leandre-matin--630x405--%C2%A9-Mary-Quincy.jpg", distance: 90 },
+                { title: "Versailles", img: "https://i4.ytimg.com/vi/wi3NlaiwjP4/maxresdefault.jpg", distance: 100 },
+            ],
+            Hiver: [
+                { title: "Lac d'Annecy", img: "https://www.thonescoeurdesvallees.com/wp-content/uploads/2020/09/La_ville_et_le_lac_d_Annecy-Lac_Annecy_Tourisme-907-1200x794.jpg", distance: 10 },
+                { title: "Calanques de Marseille", img: "https://i-de.unimedias.fr/2023/12/07/def-189-calanques-cmoirenc117610-6571e657e00ed.jpg?auto=format%2Ccompress&crop=faces&cs=tinysrgb&fit=max&w=1050", distance: 20 },
+                { title: "Bordeaux", img: "https://images.ladepeche.fr/api/v1/images/view/6611133ecfd07d1f682952ca/large/image.jpg?v=1", distance: 30 },
+                { title: "Dune du Pilat", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPcG9MKp4Uh9exv0p9HE0V8tQ5iQ6yEsCBiQ&s", distance: 40 },
+                { title: "Puy du Fou", img: "https://www.augoutdemma.be/wp-content/uploads/2022/05/puy-du-fou-2022-76.jpg", distance: 50 },
+                { title: "Lyon", img: "https://a2f6z9k6.rocketcdn.me/wp-content/uploads/2019/11/ville_lyon-scaled.jpg", distance: 60 },
+                { title: "Mont Saint-Michel", img: "https://www.angemichel.com/voy_content/uploads/2024/03/mont-saint-michel.png", distance: 70 },
+                { title: "Lille", img: "https://pvtistes.net/wp-content/uploads/2023/11/shutterstock_115970323-1900x800.jpg", distance: 80 },
+                { title: "Normandie", img: "https://www.okvoyage.com/wp-content/uploads/2023/11/les-belles-villes-de-normandie.jpg", distance: 90 },
+                { title: "Mont Ventoux", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcDVNK5_Z7_So2Ayp78Zjjbaml8JYVCpegjQ&s", distance: 100 },
+            ]
+        };
+
+        const conseilsEntrainement = {
+            Printemps: [
+                "Réchauffez-vous avant chaque sortie.",
+                "Faites des sorties longues pour améliorer votre endurance.",
+                "Augmentez progressivement les distances chaque semaine."
+            ],
+            Été: [
+                "Restez hydraté, surtout lors des journées chaudes.",
+                "Privilégiez les sorties matinales ou en soirée pour éviter la chaleur intense.",
+                "Faites des séances de fractionné pour améliorer votre explosivité."
+            ],
+            Automne: [
+                "Réduisez légèrement la distance pour préserver vos jambes.",
+                "Entraînez-vous par temps frais pour améliorer votre résistance au froid.",
+                "Augmentez les entraînements de renforcement musculaire."
+            ],
+            Hiver: [
+                "Optez pour des séances de home-trainer si les conditions extérieures sont trop difficiles.",
+                "Mettez-vous en condition pour les courses hivernales.",
+                "Faites des entraînements courts mais intenses pour maintenir votre forme."
+            ]
+        };
+
+        function generateResults() {
+            const saison = document.getElementById("season").value;
+            const distance = parseInt(document.getElementById("distance").value);
+            const results = document.getElementById("results");
+            const tips = document.getElementById("training-tips");
+
+            if (!saison || isNaN(distance)) {
+                alert("Veuillez remplir tous les champs !");
+                return;
+            }
+
+            const parcours = parcoursParSaison[saison]?.filter(p => p.distance <= distance) || [];
+            const conseils = conseilsEntrainement[saison] || [];
+
+            if (parcours.length === 0) {
+                results.innerHTML = `<p>Aucun parcours trouvé pour la saison ${saison} et ${distance} km.</p>`;
+                return;
+            }
+
+            results.innerHTML = `
+                <div class="section-title">Parcours en ${saison}</div>
+                <div class="result-cards">
+                    ${parcours.map(p => `
+                        <div class="result-card">
+                            <img src="${p.img}" alt="${p.title}">
+                            <h3>${p.title}</h3>
+                            <p><strong>${p.distance} km</strong></p>
+                        </div>
+                    `).join("")}
+                </div>
+            `;
+
+            tips.innerHTML = `
+                <h4>Conseils d'Entraînement pour ${saison}</h4>
+                <ul>
+                    ${conseils.map(c => `<li>${c}</li>`).join("")}
+                </ul>
+            `;
+        }
+    </script>
+</body>
+</html>
