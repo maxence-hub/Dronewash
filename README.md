@@ -3,293 +3,429 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Le Monde du Vélo</title>
-    <style>
-        /* Style général du site */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(45deg, #009688, #004d00);
-            background-size: 400% 400%;
-            animation: gradientAnimation 10s ease infinite;
-            color: white;
-        }
+    <title>Traitement de Toitures par Drones</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+    <script src="script1.js" defer></script>
+    <style>   
+	body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;  
+        color: #333;
+    }
+    header {
+        background-color: #2c3e50;
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+    }
+    nav {
+        display: flex;
+        justify-content: center;
+        background-color: #34495e;
+        padding: 10px;
+    }
+    nav a {
+        color: white;
+        padding: 14px 20px;
+        text-decoration: none;
+        font-size: 1.2em;
+        margin: 0 10px;
+        transition: background-color 0.3s;
+    }
+    nav a:hover {
+        background-color: #1abc9c;
+    }
+    section {
+        padding: 40px 20px;
+    }
+    .container {
+        width: 80%;
+        margin: 0 auto;
+    }
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        text-align: center;
+    }
+    .service-item {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+        transition: transform 0.3s;
+    }
+    .service-item:hover {
+        transform: translateY(-5px);
+    }
+    .service-item img {
+        width: 100%;
+        border-radius: 10px;
+    }
+    .cta-button, .submit-button {
+        background-color: #1abc9c;
+		text-decoration: none;
+        color: white;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.5em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: block;
+        margin: 20px auto;
+    }
+    .cta-button:hover, .submit-button:hover {
+        background-color: #16a085;
+    }
+    .devis-form, .prestation-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .devis-form input, .devis-form select, .prestation-form input {
+        width: 100%;
+        padding: 12px;
+        font-size: 1.1em;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .prestation-form input:focus {
+        border-color: #1abc9c;
+        box-shadow: 0px 0px 5px rgba(26, 188, 156, 0.5);
+        outline: none;
+    }
 
-        /* Animation du fond */
-        @keyframes gradientAnimation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    /* Ajout du style spécifique pour la section du formulaire */
+    #prestation-form {
+        display: none;
+        margin-top: 30px;
+        padding: 40px 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
 
-        /* En-tête du site */
-        header {
-            text-align: center;
-            padding: 50px;
-            background-color: rgba(0, 77, 0, 0.7);
-            border-bottom: 2px solid #fff;
-            position: relative;
-            animation: fadeInDown 1s ease-out;
-        }
+    #prestation-form .container {
+        width: 80%;
+        max-width: 600px;
+        margin: 0 auto;
+    }
 
-        header h1 {
-            font-size: 48px;
-            font-weight: 600;
-            margin: 0;
-        }
+    #prestation-form h2 {
+        font-size: 1.8em;
+        color: #2c3e50;
+        margin-bottom: 20px;
+    }
 
-        header p {
-            font-size: 18px;
-            font-weight: 300;
-        }
+    /* Message de confirmation */
+    #response-message {
+        font-size: 1.2em;
+        color: #2ecc71;
+        margin-top: 15px;
+        display: none;
+    }
 
-        /* Navigation */
-        nav {
-            background-color: #333;
-            overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 2s ease-out;
-        }
+    /* Animation d’apparition du formulaire */
+    #prestation-form.show {
+        display: block;
+        animation: fadeIn 0.5s ease-in-out;
+    }
 
-        nav a {
-            color: white;
-            padding: 15px 25px;
-            text-decoration: none;
-            display: inline-block;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        nav a:hover {
-            background-color: #4CAF50;
-            color: black;
-        }
-
-        /* Conteneur principal */
-        .container {
-            width: 80%;
-            margin: 50px auto;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            margin-bottom: 30px;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .section-content {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            animation: fadeInUp 1s ease-out;
-        }
-
-        .card {
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-            width: 30%;
-            margin: 15px;
-            text-align: center;
-            padding: 20px;
+    @keyframes fadeIn {
+        from {
             opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUpCard 1s forwards;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card img {
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover img {
-            transform: scale(1.1);
-        }
-
-        .card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
-
-        .card h3 {
-            font-size: 24px;
-            color: #333;
-            margin: 20px 0;
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
+    }
 
-        .card p {
-            font-size: 16px;
-            color: #555;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
+    footer {
+        background-color: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+        margin-top: 40px;
+    }
+	/* Formulaire en haut à droite */
+        .profile-container {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            width: 200px;
             text-align: center;
-            padding: 15px;
-            position: fixed;
-            bottom: 0;
+        }
+        input {
             width: 100%;
-            animation: fadeIn 2s ease-out;
+            padding: 8px;
+            margin: 5px 0;
+            font-size: 0.9em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
         }
-
-        footer p {
-            margin: 0;
+        .submit-button {
+            background-color: #1abc9c;
+            color: white;
+            padding: 8px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+		}
+        .sendEmail {
+            background-color: #1abc9c;
+            color: white;
+            padding: 8px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;	
         }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+        /* Profil utilisateur */
+        .profile {
+            display: none;
+            text-align: center;
         }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .profile img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
         }
-
-        @keyframes fadeInUpCard {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            background: white;
+            width: 150px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+            text-align: left;
         }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .dropdown a, .dropdown button {
+            display: block;
+            padding: 8px;
+            text-decoration: none;
+            color: black;
+            background: white;
+            border: none;
+            width: 100%;
+            text-align: left;
         }
-
-        /* Responsivité */
-        @media (max-width: 768px) {
-            .container {
-                width: 90%;
-            }
-
-            .card {
-                width: 45%;
-            }
-
-            header h1 {
-                font-size: 36px;
-            }
-
-            .section-title {
-                font-size: 30px;
-            }
+        .dropdown button:hover, .dropdown a:hover {
+            background: #f1f1f1;
+		}
+        .email-button {
+            background-color: #1abc9c;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: background-color 0.3s;
         }
-
-        @media (max-width: 480px) {
-            .card {
-                width: 100%;
-            }
-
-            header h1 {
-                font-size: 28px;
-            }
-
-            .section-title {
-                font-size: 24px;
-            }
+        .email-button:hover {
+            background-color: #16a085;
         }
-    </style>
+</style>
 </head>
 <body>
 
 <header>
-    <h1>Le Monde du Vélo</h1>
-    <p>Bienvenue dans l'univers du vélo : conseils, équipements et passion !</p>
+    <h1>Traitement de Toitures par Drones</h1>
+    <p>Un service moderne, rapide et sécurisé pour la maintenance de votre toiture</p>
 </header>
 
+<div class="container">
+    <!-- Formulaire d'inscription -->
+    <div id="signup-section">
+        <h2>Inscription</h2>
+        <form id="signupForm" class="form-container">
+            <input type="text" id="name" placeholder="Nom complet" required>
+            <input type="email" id="email" placeholder="Adresse email" required>
+            <input type="password" id="password" placeholder="Mot de passe" required>
+            <button type="submit" class="submit-button">S'inscrire</button>
+        </form>
+    </div>
+
+    <!-- Profil utilisateur -->
+    <div id="profile-section">
+        <label for="uploadImage">
+            <img id="profileImage" src="default-avatar.png" class="profile-pic" alt="Avatar">
+        </label>
+        <input type="file" id="uploadImage" class="hidden">
+        <p id="profileEmail"></p>
+        <button id="logoutButton" class="logout-button">Déconnexion</button>
+    </div>
+</div>
+
+<script src="script1.js"></script>
+
 <nav>
-    <a href="#accueil">Accueil</a>
-    <a href="#conseils">Conseils</a>
-    <a href="#types">Types de vélos</a>
-	<a href="entrainement.html">Entraînements</a>
-	<a href="circuit.html">Circuit</a>
+    <a href="#services">Nos Services</a>
+	<a href="#choisir">Pourquoi nous découvrir ?</a>
+    <a href="#devis">Devis Gratuit</a>
     <a href="#contact">Contact</a>
 </nav>
 
-<div class="container" id="accueil">
-    <h2 class="section-title">Introduction au Vélo</h2>
-    <div class="section-content">
-        <div class="card">
-            <img src="https://www.francevelotourisme.com/sites/default/files/styles/ogimage/public/medias/images/scandibrique---oise---alexandre-leroy_53541932596_o.jpg?itok=XKFZa9Pl" alt="Vélo en plein air">
-            <h3>Le vélo : un moyen de transport écologique</h3>
-            <p>Le vélo est un moyen de transport pratique et respectueux de l'environnement. Il permet de réduire les émissions de CO2 tout en améliorant votre santé.</p>
-        </div>
-        <div class="card">
-            <img src="https://artivelo.fr/483-large_default/velo-urbain-ktm-kent-11-alfine-belt.jpg" alt="Vélo urbain">
-            <h3>Vélo urbain</h3>
-            <p>Les vélos urbains sont parfaits pour vos déplacements quotidiens en ville. Léger et pratique, il facilite vos trajets.</p>
-        </div>
-        <div class="card">
-            <img src="https://cdn.shoplightspeed.com/shops/624895/files/59281504/image.jpg" alt="Vélo de montagne">
-            <h3>Vélo de montagne</h3>
-            <p>Pour les passionnés de nature et d'aventure, le vélo de montagne est idéal. Il est conçu pour affronter les terrains les plus difficiles.</p>
-        </div>
-    </div>
-</div>
-
-<div class="container" id="conseils">
-    <h2 class="section-title">Conseils pour débuter</h2>
-    <p>Avant de vous lancer dans le monde du vélo, voici quelques conseils utiles :</p>
-    <ul>
-        <li><strong>Choisir le bon vélo :</strong> Optez pour un vélo adapté à votre activité (urbain, montagne, route, etc.).</li>
-        <li><strong>Investir dans un bon équipement :</strong> Ne négligez pas le casque, les gants et des vêtements confortables.</li>
-        <li><strong>Commencer progressivement :</strong> Si vous êtes débutant, commencez par des trajets courts avant d'augmenter la distance.</li>
-    </ul>
-</div>
-
-<div class="container" id="types">
-    <h2 class="section-title">Les Différents Types de Vélos</h2>
-    <div class="section-content">
-        <div class="card">
-            <img src="https://www.ebike24.fr/blog/wp-content/uploads/2023/12/velo-de-route-a-assistance-electrique-e-edr-af-sram-apex-axs-930x620.jpg" alt="Vélo de course">
-            <h3>Vélo de course</h3>
-            <p>Conçu pour la vitesse et l'efficacité sur route, ce vélo est parfait pour les cyclistes de compétition ou les amateurs de longues distances.</p>
-        </div>
-        <div class="card">
-            <img src="https://im.qccdn.fr/node/guide-d-achat-velo-electrique-8147/thumbnail_1000x600px-142430.jpg" alt="Vélo électrique">
-            <h3>Vélo électrique</h3>
-            <p>Avec un moteur électrique, ce vélo vous aide à parcourir de longues distances sans effort supplémentaire, parfait pour les trajets en ville.</p>
-        </div>
-        <div class="card">
-            <img src="https://www.cyclable.com/47448-thickbox_default/velo-enfant-14-pouces-ridgeback-mx14.jpg" alt="Vélo pour enfant">
-            <h3>Vélo pour enfant</h3>
-            <p>Les vélos pour enfants sont conçus pour offrir sécurité et confort tout en apprenant à rouler.</p>
+<section id="services">
+    <div class="container">
+        <h2>Nos Services</h2>
+        <div class="services-grid">
+            <div class="service-item">
+                <img src="https://nord-clean-drone.com/images/drone_pompe.webp" alt="Inspection de toiture">
+                <h3>Inspection de toiture</h3>
+                <p>Inspection aérienne par drone.</p>
+            </div>
+            <div class="service-item">
+                <img src="https://pixwing.fr/wp-content/uploads/2023/03/traitement-toit-facade-drone-pixwing-11.jpg" alt="Nettoyage et entretien">
+                <h3>Nettoyage et entretien</h3>
+                <p>Nettoyage et démoussage haute précision.</p>
+            </div>
+            <div class="service-item">
+                <img src="https://www.technidrone.fr/public/img/big/20221203044639jpg_64171f7ce55d87.55829949.jpg" alt="Réparation rapide">
+                <h3>Réparation rapide</h3>
+                <p>Application d'hydrofuge protecteur.</p>
+            </div>
         </div>
     </div>
-</div>
+</section>
+
+<section id="choisir">
+    <div class="container">
+        <h2>Pourquoi nous découvrir ?</h2>
+        <div>
+            <p>✔️ Expertise avancée en traitement de toitures</p>
+            <p>✔️ Technologie de pointe et solutions écologiques</p>
+            <p>✔️ Sécurité et efficacité garanties</p>
+            <p>✔️ Service rapide et sans échafaudage</p>
+            <p>✔️ Résultats longue durée et satisfaction client assurée</p>
+        </div>
+    </div>
+</section>
+
+<section id="devis">
+    <div class="container">
+        <h2>Obtenez Votre Devis Gratuit</h2>
+        <form class="devis-form" onsubmit="generateQuote(event)">
+            <input type="number" id="area" placeholder="Surface de la toiture (m²)" required>
+            <select id="condition" required>
+                <option value="bonne">Bonne</option>
+                <option value="moyenne">Moyenne</option>
+                <option value="mauvaise">Mauvaise</option>
+            </select>
+            <input type="number" id="height" placeholder="Hauteur de la toiture (m)" required>
+            <button type="submit" class="cta-button">Obtenir le devis</button>
+        </form>
+        <div id="quote-result">
+            <h3>Votre devis estimé:</h3>
+            <p id="quote-text"></p>
+			<button class="email-button" onclick="sendEmail()">📩 Envoyer Email</button>
+
+<script>
+        function sendEmail() {
+            let name = "Jean Dupont";
+            let email = "jean.dupont@email.com";
+            let surface = 100;
+            let height = 10;
+
+            let subject = encodeURIComponent("Demande de devis");
+            let body = encodeURIComponent(
+                `Bonjour,\n\nJe souhaiterais obtenir un devis pour le traitement de ma toiture.\n\n` +
+                `- Nom: ${name}\n- Email: ${email}\n- Surface: ${surface}m²\n- Hauteur: ${height}m\n\nMerci d'avance !`
+            );
+
+            // Lien pour Gmail
+            let gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=dhaeyermaxence@gmail.com&su=${subject}&body=${body}`;
+
+            // Ouvrir Gmail dans un nouvel onglet
+            window.open(gmailLink, '_blank');
+        }
+    </script>
+        </div>
+    </div>
+</section>
+
 
 <footer id="contact">
-    <p>Contactez-nous : contact@lemondevélo.fr</p>
-    <p>&copy; 2024 Le Monde du Vélo</p>
+    <p>Contactez-nous au +33 6 09 68 92 63 ou par email à dhaeyermanuel@gmail.com</p>
+    <p>&copy; 2025 Traitement de Toitures par Drones</p>
 </footer>
+
+<div class="banner" id="success-banner">✔️ Envoyé !</div>
+
+<script>
+    function generateQuote(event) {
+        event.preventDefault();
+        const area = document.getElementById("area").value;
+        const condition = document.getElementById("condition").value;
+        const height = document.getElementById("height").value;
+
+        let price = area * 10;
+        if (condition === "moyenne") price += 100;
+        if (condition === "mauvaise") price += 200;
+        if (height > 10) price += 150;
+
+        document.getElementById("quote-text").textContent = `Le prix estimé pour votre projet est de ${price}€ TTC.`;
+        document.getElementById("quote-result").style.display = "block";
+    }
+
+    function showPrestationForm() {
+        document.getElementById("prestation-form").style.display = "block";
+    }
+
+    function submitPrestation(event) {
+        event.preventDefault();
+        showBanner();
+    }
+
+    function showBanner() {
+        const banner = document.getElementById("success-banner");
+        banner.style.display = "block";
+
+        setTimeout(() => {
+            banner.style.display = "none";
+        }, 5000);
+    }
+
+document.querySelector(".prestation-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    let formData = new FormData(this);
+
+    fetch("send_email.php", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        if (data.trim() === "success") {
+            document.getElementById("response-message").style.display = "block";
+            this.reset();
+        } else {
+            alert("❌ Une erreur est survenue. Merci d’essayer à nouveau.");
+        }
+    })
+    .catch(error => {
+        console.error("Erreur:", error);
+    });
+});
+</script>
+
 </body>
 </html>
