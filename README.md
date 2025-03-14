@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traitement de Toitures par Drones</title>
+	<meta name="description" content="Découvrez nos services de traitement de toitures par drones : inspection, nettoyage et entretien rapide, écologique et efficace. Obtenez votre devis gratuit dès maintenant !">
 	<script src="https://cdn.tailwindcss.com"></script>
     <script src="script1.js" defer></script>
     <style>   
@@ -242,6 +243,56 @@
         .email-button:hover {
             background-color: #16a085;
         }
+		@media (max-width: 1024px) {
+    .container {
+        width: 90%;
+    }
+
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav a {
+        padding: 10px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 768px) {
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-item {
+        padding: 15px;
+    }
+
+    .cta-button {
+        font-size: 1.2em;
+        padding: 12px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .container {
+        width: 95%;
+    }
+
+    .cta-button {
+        font-size: 1em;
+        padding: 10px 20px;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -251,36 +302,12 @@
     <p>Un service moderne, rapide et sécurisé pour la maintenance de votre toiture</p>
 </header>
 
-<div class="container">
-    <!-- Formulaire d'inscription -->
-    <div id="signup-section">
-        <h2>Inscription</h2>
-        <form id="signupForm" class="form-container">
-            <input type="text" id="name" placeholder="Nom complet" required>
-            <input type="email" id="email" placeholder="Adresse email" required>
-            <input type="password" id="password" placeholder="Mot de passe" required>
-            <button type="submit" class="submit-button">S'inscrire</button>
-        </form>
-    </div>
-
-    <!-- Profil utilisateur -->
-    <div id="profile-section">
-        <label for="uploadImage">
-            <img id="profileImage" src="default-avatar.png" class="profile-pic" alt="Avatar">
-        </label>
-        <input type="file" id="uploadImage" class="hidden">
-        <p id="profileEmail"></p>
-        <button id="logoutButton" class="logout-button">Déconnexion</button>
-    </div>
-</div>
-
-<script src="script1.js"></script>
-
 <nav>
     <a href="#services">Nos Services</a>
 	<a href="#choisir">Pourquoi nous découvrir ?</a>
     <a href="#devis">Devis Gratuit</a>
-    <a href="#contact">Contact</a>
+	<a href="#contact">Contact</a>
+
 </nav>
 
 <section id="services">
@@ -346,16 +373,15 @@
 
             let subject = encodeURIComponent("Demande de devis");
             let body = encodeURIComponent(
-                `Bonjour,\n\nJe souhaiterais obtenir un devis pour le traitement de ma toiture.\n\n` +
+                `Bonjour,\n\nJe souhaiterais obtenir un devis pour le traitement de ma toiture. Veuillez changer les informations ci contre:\n\n` +
                 `- Nom: ${name}\n- Email: ${email}\n- Surface: ${surface}m²\n- Hauteur: ${height}m\n\nMerci d'avance !`
             );
 
             // Lien pour Gmail
-            let gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=dhaeyermaxence@gmail.com&su=${subject}&body=${body}`;
+            let mailtoLink = `https://mail.google.com/mail/?view=cm&fs=1&to=dhaeyermaxence@gmail.com&su=${subject}&body=${body}`;
 
-            // Ouvrir Gmail dans un nouvel onglet
-            window.open(gmailLink, '_blank');
-        }
+            window.location.href = mailtoLink;
+}
     </script>
         </div>
     </div>
@@ -425,6 +451,30 @@ document.querySelector(".prestation-form").addEventListener("submit", function(e
         console.error("Erreur:", error);
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const areaInput = document.getElementById("area");
+    const conditionInput = document.getElementById("condition");
+    const heightInput = document.getElementById("height");
+    const quoteText = document.getElementById("quote-text");
+
+    function updateQuote() {
+        let area = parseFloat(areaInput.value) || 0;
+        let condition = conditionInput.value;
+        let height = parseFloat(heightInput.value) || 0;
+
+        let price = area * 10;
+        if (condition === "moyenne") price += 100;
+        if (condition === "mauvaise") price += 200;
+        if (height > 10) price += 150;
+
+        quoteText.textContent = `Le prix estimé pour votre projet est de ${price}€ TTC.`;
+    }
+
+    areaInput.addEventListener("input", updateQuote);
+    conditionInput.addEventListener("change", updateQuote);
+    heightInput.addEventListener("input", updateQuote);
+});
+
 </script>
 
 </body>
