@@ -10,6 +10,7 @@
 }
 </script>
 
+<link rel="manifest" href="/manifest.json">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -412,6 +413,12 @@
     <p>&copy; 2025 Traitement de Toitures par Drones</p>
 </footer>
 
+<div id="install-banner" class="install-banner" style="display: none;">
+    <p>Ajoutez notre site à votre écran d'accueil pour une meilleure expérience.</p>
+    <button id="install-button">Installer</button>
+    <button id="dismiss-button">Ignorer</button>
+</div>
+
 <div class="banner" id="success-banner">✔️ Envoyé !</div>
 
 <script>
@@ -493,7 +500,26 @@ document.addEventListener("DOMContentLoaded", function () {
     conditionInput.addEventListener("change", updateQuote);
     heightInput.addEventListener("input", updateQuote);
 });
+let deferredPrompt;
+    window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        deferredPrompt = event;
+        document.getElementById('install-banner').style.display = 'block';
+    });
 
+    document.getElementById('install-button').addEventListener('click', () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                document.getElementById('install-banner').style.display = 'none';
+                deferredPrompt = null;
+            });
+        }
+    });
+
+    document.getElementById('dismiss-button').addEventListener('click', () => {
+        document.getElementById('install-banner').style.display = 'none';
+    });
 </script>
 
 </body>
