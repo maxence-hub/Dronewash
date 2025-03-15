@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+<link rel="icon" type="image/png" href="index.html">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "url": "https://maxence-hub.github.io/toituredronefr/",
+  "logo": "file:///C:/Users/ordi2225451/Documents/entreprise%20papa/derni%C3%A8re%20version/image.ing.webp"
+}
+</script>
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Traitement de Toitures par Drones</title>
 	<meta name="description" content="Découvrez nos services de traitement de toitures par drones : inspection, nettoyage et entretien rapide, écologique et efficace. Obtenez votre devis gratuit dès maintenant !">
 	<script src="https://cdn.tailwindcss.com"></script>
     <script src="script1.js" defer></script>
-    <style>   
+    <style> 
+.logo {
+    width: 100px; /* Ajuste la taille selon tes besoins */
+    height: auto;
+    display: block;
+}
+	
 	body {
         font-family: 'Arial', sans-serif;
         margin: 0;
@@ -298,6 +315,9 @@
 <body>
 
 <header>
+<a href="index.html">
+        <img src="file:///C:/Users/ordi2225451/Documents/entreprise%20papa/derni%C3%A8re%20version/image.ing.webp" class="logo">
+    </a>
     <h1>Traitement de Toitures par Drones</h1>
     <p>Un service moderne, rapide et sécurisé pour la maintenance de votre toiture</p>
 </header>
