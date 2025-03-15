@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fr">
 <head>
 <link rel="icon" type="image/png" href="index.html">
