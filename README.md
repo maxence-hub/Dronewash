@@ -1,6 +1,6 @@
 <html lang="fr">
 <head>
-<link rel="icon" type="image/png" href="index.html">
+<link rel="icon" type="image/png" href="favicon.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -9,6 +9,25 @@
   "logo": "file:///C:/Users/ordi2225451/Documents/entreprise%20papa/derni%C3%A8re%20version/image.ing.webp"
 }
 </script>
+    <link rel="manifest" href="manifest.json">
+    <script>
+        let deferredPrompt;
+
+        window.addEventListener("beforeinstallprompt", (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            document.getElementById("installButton").style.display = "block";
+        });
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    deferredPrompt = null;
+                });
+            }
+        }
+    </script>
 
 <link rel="manifest" href="/manifest.json">
 
@@ -309,6 +328,28 @@
         padding: 10px 20px;
     }
 }
+    #topButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #1abc9c;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: none;
+}
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 </style>
 </head>
@@ -317,9 +358,11 @@
 <header>
 <a href="index.html">
         <img src="file:///C:/Users/ordi2225451/Documents/entreprise%20papa/derni%C3%A8re%20version/image.ing.webp" class="logo">
+		<button id="installButton" style="display: none;">📥 Installer le site</button>
     </a>
     <h1>Traitement de Toitures par Drones</h1>
     <p>Un service moderne, rapide et sécurisé pour la maintenance de votre toiture</p>
+	<a href="téléchargement.html" download>📥 Télécharger le site</a>
 </header>
 
 <nav>
@@ -409,17 +452,11 @@
 
 
 <footer id="contact">
+<button onclick="scrollToTop()" id="topButton">⬆ Haut</button>
     <p>Contactez-nous au +33 6 09 68 92 63 ou par email à dhaeyermanuel@gmail.com</p>
     <p>&copy; 2025 Traitement de Toitures par Drones</p>
+	<a href="#Ajouter à l'accueil.html">Ajouter à l'accueil</a>
 </footer>
-
-<div id="install-banner" class="install-banner" style="display: none;">
-    <p>Ajoutez notre site à votre écran d'accueil pour une meilleure expérience.</p>
-    <button id="install-button">Installer</button>
-    <button id="dismiss-button">Ignorer</button>
-</div>
-
-<div class="banner" id="success-banner">✔️ Envoyé !</div>
 
 <script>
     function generateQuote(event) {
@@ -520,7 +557,27 @@ let deferredPrompt;
     document.getElementById('dismiss-button').addEventListener('click', () => {
         document.getElementById('install-banner').style.display = 'none';
     });
-</script>
+	
+	window.onscroll = function() {
+    document.getElementById("topButton").style.display = window.scrollY > 200 ? "block" : "none";
+};
 
-</body>
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+document.addEventListener("DOMContentLoaded", function () {
+    const elements = document.querySelectorAll(".fade-in");
+    
+    const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+            }
+        });
+    });
+
+    elements.forEach(el => observer.observe(el));
+});
+
+</script>
 </html>
