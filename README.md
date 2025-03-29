@@ -357,7 +357,7 @@
 
 <header>
 <a href="index.html">
-        <img src="file:///C:/Users/ordi2225451/Documents/entreprise%20papa/derni%C3%A8re%20version/image.ing.webp" class="logo">
+        <img src="https://nord-clean-drone.com/images/drone_pompe.webp" class="logo">
 		<button id="installButton" style="display: none;">📥 Installer le site</button>
     </a>
     <h1>Traitement de Toitures par Drones</h1>
