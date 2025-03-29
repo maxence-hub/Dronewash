@@ -362,7 +362,15 @@
     </a>
     <h1>Traitement de Toitures par Drones</h1>
     <p>Un service moderne, rapide et sécurisé pour la maintenance de votre toiture</p>
-	<a href="téléchargement.html" download>📥 Télécharger le site</a>
+	<a id="download-btn" href="site final 4.html" download="site final 4.html">📥 Télécharger le site</a>
+
+<script>
+document.getElementById("download-btn").addEventListener("click", function() {
+    setTimeout(() => {
+        alert("Téléchargement terminé !\nAjoutez le fichier manuellement à l'écran d'accueil.");
+    }, 3000); // Simulation de délai
+});
+</script>
 </header>
 
 <nav>
